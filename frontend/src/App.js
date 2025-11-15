@@ -5,19 +5,20 @@ import Dashboard from './components/Dashboard';
 import theme from './theme';
 import { fetchMentions } from './api/mentionApi';
 
-const socket = io('http://localhost:5000');
+
+const socket = io(process.env.REACT_APP_BACKEND_URL);
 
 function App() {
   const [mentions, setMentions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [spike, setSpike] = React.useState(null);
-  
+  const baseURL = process.env.REACT_APP_BACKEND_URL;
 
 
   React.useEffect(() => {
     async function fetchSpike() {
       try {
-        const res = await fetch("http://localhost:5000/api/spike");
+        const res = await fetch(`${baseURL}/api/spike`);
         const data = await res.json();
         setSpike(data);
       } catch (e) {

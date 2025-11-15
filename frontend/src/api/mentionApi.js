@@ -1,9 +1,9 @@
 import axios from "axios";
 
-const BASE = "http://localhost:5000/api/mentions";
+const baseURL = process.env.REACT_APP_BACKEND_URL; 
 
 export const addMention = (data) =>
-  axios.post(`${BASE}/`, data);
+  axios.post(`${baseURL}/`, data);
 
 export const fetchMentions = () =>
-  axios.get(`${BASE}/`);
+  axios.get(`${baseURL}/`);
