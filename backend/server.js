@@ -14,7 +14,10 @@ connectDB();
 
 const app = express();
 const server = http.createServer(app);
-app.use(cors());
+app.use(cors({
+  origin: ["http://localhost:3000", "https://brand-reputation-monitor.vercel.app"],
+  credentials: true
+}));
 app.use(express.json());
 
 const { aggregateAndSaveBrands } = require('./services/autofetch');
@@ -22,10 +25,11 @@ setInterval(aggregateAndSaveBrands, 4 * 60 * 1000);
 
 const io = new Server(server, {
   cors: {
-    origin: 'http://localhost:3000' , 
-    methods: ['GET', 'POST'],
-  },
+    origin: ["http://localhost:3000", "https://brand-reputation-monitor.vercel.app"],
+    methods: ["GET", "POST"]
+  }
 });
+
 
 
 io.on('connection', (socket) => {
