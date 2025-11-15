@@ -21,7 +21,7 @@ app.use(cors({
 app.use(express.json());
 
 const { aggregateAndSaveBrands } = require('./services/autofetch');
-setInterval(aggregateAndSaveBrands, 4 * 60 * 1000); 
+setInterval(aggregateAndSaveBrands, 10 * 60 * 1000); 
 
 const io = new Server(server, {
   cors: {
